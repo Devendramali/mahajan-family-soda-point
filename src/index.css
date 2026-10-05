@@ -1572,6 +1572,10 @@ h1 em {
     .mobile-order {
         margin-top: 8px;
     }
+    .nav-links button.mobile-order{
+        padding: 6px 12px;
+
+    }
 
     .desktop-order {
         display: none;

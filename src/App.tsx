@@ -135,9 +135,19 @@ if (marqueeTrack) {
       gsap.from('.hero-kicker, .hero-title-line, .hero-copy, .hero-actions', { opacity: 0, y: 26, duration: 0.8, stagger: 0.1, delay: 1.9, ease: 'power3.out' });
       gsap.to('.hero-glow', { y: 90, x: 30, duration: 8, repeat: -1, yoyo: true, ease: 'sine.inOut' });
       gsap.to('.floating-bubble', { y: -120, opacity: 0, duration: 4, stagger: 0.8, repeat: -1, ease: 'none' });
-      gsap.utils.toArray<HTMLElement>('.reveal').forEach((element) => {
-        gsap.from(element, { opacity: 0, y: 38, duration: 0.85, ease: 'power3.out', scrollTrigger: { trigger: element, start: 'top 84%' } });
-      });
+    gsap.utils.toArray<HTMLElement>('.reveal').forEach((element) => {
+  gsap.from(element, {
+    opacity: 0,
+    y: 38,
+    duration: 0.85,
+    ease: 'power3.out',
+    scrollTrigger: {
+      trigger: element,
+      start: 'top 94%',
+      invalidateOnRefresh: true,
+    },
+  });
+});
       gsap.utils.toArray<HTMLElement>('.counter').forEach((element) => {
         const target = Number(element.dataset.value ?? 0);
         gsap.fromTo(element, { innerText: 0 }, { innerText: target, duration: 1.8, snap: { innerText: 1 }, scrollTrigger: { trigger: element, start: 'top 84%' } });
@@ -152,6 +162,13 @@ if (marqueeTrack) {
     document.body.style.overflow = lightbox ? 'hidden' : '';
     return () => { document.body.style.overflow = ''; };
   }, [lightbox]);
+  useEffect(() => {
+  const timer = setTimeout(() => {
+    ScrollTrigger.refresh();
+  }, 100);
+
+  return () => clearTimeout(timer);
+}, [activeCategory]);
 
   const scrollTo = (id: string) => {
     setMenuOpen(false);
