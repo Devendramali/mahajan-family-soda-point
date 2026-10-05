@@ -1616,6 +1616,10 @@ h1 em {
     .section-inner {
         padding-block: 95px;
     }
+    .frame-note {
+    position: absolute;
+    right: 0px;
+    }
 
     .about-grid,
     .reviews-layout,
